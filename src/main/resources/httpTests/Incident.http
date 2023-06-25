@@ -1,0 +1,84 @@
+###
+POST http://localhost:8080/users/1/requests/1/incident
+Content-Type: application/json
+
+{
+  "solution": "Новая информация"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is " + response.status);
+        client.assert(response.body === null);
+    });
+%}
+
+###
+POST http://localhost:8080/users/1/requests/2/incident
+Content-Type: application/json
+
+{
+  "solution": "Новая информация 2"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 404, "Response status is " + response.status);
+    });
+%}
+
+###
+PUT http://localhost:8080/users/1/requests/1/incident
+Content-Type: application/json
+
+{
+  "solution": "Новая информация"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is " + response.status);
+    });
+%}
+
+###
+PUT http://localhost:8080/users/9/requests/1/incident
+Content-Type: application/json
+
+{
+  "solution": "Новая информация"
+}
+
+###
+PUT http://localhost:8080/users/1/requests/22/incident
+Content-Type: application/json
+
+{
+  "solution": "Новая информация"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 404, "Response status is " + response.status);
+    });
+%}
+
+###
+DELETE http://localhost:8080/users/7/requests/3/incident
+Content-Type: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is " + response.status);
+    });
+%}
+
+###
+DELETE http://localhost:8080/users/7/requests/3/incident
+Content-Type: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 404, "Response status is " + response.status);
+    });
+%}

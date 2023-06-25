@@ -1,0 +1,90 @@
+###
+POST http://localhost:8080/users/3/requests
+Content-Type: application/json
+
+{
+  "message": "Здравствуйте, возникла проблема с оплатой"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is " + response.status);
+        client.assert(response.body === null);
+    });
+%}
+
+###
+POST http://localhost:8080/users/312908/requests
+Content-Type: application/json
+
+{
+  "message": "Здравствуйте, возникла проблема с оплатой"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 404, "Response status is " + response.status);
+    });
+%}
+
+###
+PUT http://localhost:8080/users/3/requests/2
+Content-Type: application/json
+
+{
+  "message": "Новая информация"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is " + response.status);
+    });
+%}
+
+###
+PUT http://localhost:8080/users/312908/requests/2
+Content-Type: application/json
+
+{
+  "message": "Новая информация"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 404, "Response status is " + response.status);
+    });
+%}
+
+###
+PUT http://localhost:8080/users/3/requests/2424
+Content-Type: application/json
+
+{
+  "message": "Новая информация"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 404, "Response status is " + response.status);
+    });
+%}
+
+###
+DELETE http://localhost:8080/users/3/requests/2
+Content-Type: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is " + response.status);
+    });
+%}
+
+###
+DELETE http://localhost:8080/users/3/requests/2
+Content-Type: application/json
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 404, "Response status is " + response.status);
+    });
+%}

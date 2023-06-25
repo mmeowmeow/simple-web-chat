@@ -1,0 +1,47 @@
+###
+GET http://localhost:8080/employees
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is " + response.status);
+    });
+%}
+
+###
+GET http://localhost:8080/employees/1
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 200, "Response status is " + response.status);
+    });
+%}
+
+###
+POST http://localhost:8080/employees/1/incidents
+Content-Type: application/json
+
+{
+  "solution": "Решение..",
+  "dateOfSolution": "2023-06-09"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 201, "Response status is " + response.status);
+    });
+%}
+
+###
+POST http://localhost:8080/employees/44/incidents
+Content-Type: application/json
+
+{
+  "solution": "Решение..",
+  "dateOfSolution": "2023-06-09"
+}
+
+> {%
+    client.test("Request executed successfully", function () {
+        client.assert(response.status === 404, "Response status is " + response.status);
+    });
+%}
