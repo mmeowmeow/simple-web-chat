@@ -1,0 +1,9 @@
+.git/
+target/
+.idea/
+.vscode/
+.lib/
+.DS_Store
+docker-compose.yml
+rest-client.env.json
+Makefile
