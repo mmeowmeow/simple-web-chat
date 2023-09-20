@@ -23,8 +23,8 @@ FROM eclipse-temurin:17-jre-alpine AS runtime
 WORKDIR /app
 
 # Copy the built JAR file from the previous stage
-COPY --from=build /build/target/*.jar my-app.jar
+COPY --from=build /build/target/*.jar chat.jar
 
 EXPOSE 8080
 # Set the entry point for the container
-ENTRYPOINT ["java", "-jar", "my-app.jar"]
+ENTRYPOINT ["java", "-jar", "chat.jar"]
