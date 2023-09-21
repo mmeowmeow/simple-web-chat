@@ -25,3 +25,25 @@ jobs:
         cache: maven
     - name: Run the Maven verify phase
       run: mvn --batch-mode --update-snapshots verify
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v3
+    - name: available platforms
+      run: echo ${{ steps.buildx.outputs.platforms }}
+    - name: build and deploy master image to ghcr.io
+      if: ${{ github.ref == 'refs/heads/master' }}
+      env:
+        GITHUB_PACKAGE_TOKEN: ${{ secrets.PKG_TOKEN }}
+        USERNAME: ${{ github.actor }}
+        GITHUB_SHA: ${{ github.sha}}
+        GITHUB_REF: ${{ github.ref}}
+      run: |
+        ref="$(echo ${GITHUB_REF} | cut -d'/' -f3)"
+        echo GITHUB_REF - $ref
+        echo ${GITHUB_PACKAGE_TOKEN} | docker login ghcr.io -u ${USERNAME} --password-stdin
+        docker buildx build --push \
+            --build-arg CI=github --build-arg GITHUB_SHA=${GITHUB_SHA} --build-arg GIT_BRANCH=${ref} \
+            --platform linux/amd64,linux/arm/v7,linux/arm64 \
+            -t ghcr.io/${USERNAME}/simple-web-chat:${ref} -t ${USERNAME}/simple-web-chat:${ref} .
