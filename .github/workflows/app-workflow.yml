@@ -35,6 +35,7 @@ jobs:
         cache: maven
 
     - name: Run the Maven verify phase
+      id: build
       run: mvn --batch-mode --update-snapshots verify
 
     - name: Check PR
@@ -57,7 +58,7 @@ jobs:
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
-      if: ${{ github.ref == 'refs/heads/master' }}
+      if: ${{ github.ref == 'refs/heads/master' && steps.build.outcome == 'success' }}
       with:
         context: .
         push: true
