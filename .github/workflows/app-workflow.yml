@@ -38,6 +38,12 @@ jobs:
       id: build
       run: mvn --batch-mode --update-snapshots verify
 
+    - name: Push package
+      if: ${{ github.ref == 'refs/heads/master' && steps.build.outcome == 'success' }}
+      run: mvn --batch-mode deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Check PR
       uses: 8BitJonny/gh-get-current-pr@2.2.0
       id: PR
