@@ -1,5 +1,19 @@
-# simple-web-chat
+# simple-web-chat - API
 
 [![my-app-workflow](https://github.com/mmeowmeow/simple-web-chat/actions/workflows/app-workflow.yml/badge.svg)](https://github.com/mmeowmeow/simple-web-chat/actions/workflows/app-workflow.yml)
 
-# 
+## Installation
+
+Can be install jar (from Packages page) or as a docker image: `docker pull ghcr.io/mmeowmeow/simple-web-chat:latest`
+
+## Run locally
+
+`java -jar path/to/jar`<br>
+
+or<br>
+
+`docker compose up -d` from app directory
+
+## List endpoints
+
+http://localhost:8080/swagger-ui/index.html
