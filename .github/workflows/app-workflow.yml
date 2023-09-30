@@ -3,15 +3,15 @@ name: my-app-workflow
 on:
   push:
     branches:
-      - 'master'
-      - 'dev'
+      - '**'
     tags:
       - 'v*'
     paths:
       - 'src/**'
       - '.github/workflows/app-workflow.yaml'
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - '**'
     paths:
       - 'src/**'
       - '.github/workflows/app-workflow.yaml'
