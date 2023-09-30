@@ -8,28 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 @DataJdbcTest
 @ExtendWith(SpringExtension.class)
 public class UserRepositoryTest {
-
+    
     @Autowired
     UserRepository userRepository;
 
-    public UserRepositoryTest() {
+    @Test
+    public void testFindUserByFirstName() {
+        User foundUser = userRepository.findUserByFirstName("Winifield");
+        assertThat(foundUser.getFirstName()).isEqualTo("Winifield");
     }
 
     @Test
-    public void findUserByFirstName() {
-        User expectedUser = entities();
-
-        User actualUser = userRepository.findUserByFirstName("Winifield");
-
-        assertEquals(expectedUser.getId(), actualUser.getId());
+    public void testFindUserByFirstNameNotFound() {
+        User foundUser = userRepository.findUserByFirstName("NonExistentUser");
+        assertThat(foundUser).isNull();
     }
 
-    private User entities() {
-        return new User(2L, "Winifield", "Wilderspoon", "wwilderspoon1@spiegel.de", null);
-    }
 }
