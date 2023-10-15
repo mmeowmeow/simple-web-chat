@@ -14,6 +14,12 @@ or<br>
 
 `docker compose up -d` from app directory
 
-## List endpoints
+## List REST API endpoints
 
 http://localhost:8080/swagger-ui/index.html
+
+## List WS endpoints
+
+Connection - http://localhost:8080/ws
+Group topic - http://localhost:8080/topic/messages (send to http://localhost:8080/app/chat)
+Private - http://localhost:8080/user/userName/private (send to http://localhost:8080/app/private-chat)
