@@ -20,6 +20,6 @@ http://localhost:8080/swagger-ui/index.html
 
 ## List WS endpoints
 
-Connection - http://localhost:8080/ws
-Group topic - http://localhost:8080/topic/messages (send to http://localhost:8080/app/chat)
-Private - http://localhost:8080/user/userName/private (send to http://localhost:8080/app/private-chat)
+- Connection - http://localhost:8080/ws
+- Group topic - http://localhost:8080/topic/messages (send to http://localhost:8080/app/chat)
+- Private - http://localhost:8080/user/userName/private (send to http://localhost:8080/app/private-chat)
