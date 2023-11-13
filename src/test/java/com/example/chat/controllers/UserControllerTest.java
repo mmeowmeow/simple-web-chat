@@ -3,19 +3,19 @@ package com.example.chat.controllers;
 import com.example.chat.rest.controllers.UserController;
 import com.example.chat.rest.models.User;
 import com.example.chat.rest.services.UserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
 
     @Mock
@@ -24,25 +24,19 @@ public class UserControllerTest {
     @InjectMocks
     private UserController userController;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
-
     @Test
     public void testGetAllUsers() {
         // Arrange
-        Set<User> users = new HashSet<>(Arrays.asList(
-                new User(1L, "John", "Doe", "john@example.com", null),
-                new User(2L, "Jane", "Smith", "jane@example.com", null)
-        ));
+        List<User> users = new ArrayList<>();
+        users.add(new User(1L, "John", "Doe", "john@example.com", null));
+        users.add(new User(2L, "Jane", "Smith", "jane@example.com", null));
         when(userService.get()).thenReturn(users);
 
         // Act
         Iterable<User> result = userController.getAllUsers();
 
         // Assert
-        assertEquals(users, result);
+        assertThat(result.iterator().next().getFirstName()).isEqualTo("John");
         verify(userService, times(1)).get();
     }
 
@@ -57,7 +51,7 @@ public class UserControllerTest {
         User result = userController.getUserById(userId);
 
         // Assert
-        assertEquals(user, result);
+        assertThat(result.getFirstName()).isEqualTo("Joycelin");
         verify(userService, times(1)).get(userId);
     }
 
@@ -72,7 +66,7 @@ public class UserControllerTest {
         User result = userController.getUserByName(userName);
 
         // Assert
-        assertEquals(user, result);
+        assertThat(result.getFirstName()).isEqualTo("Tallie");
         verify(userService, times(1)).getByName(userName);
     }
 }

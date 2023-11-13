@@ -19,20 +19,20 @@ public class RequestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void addRequest(@PathVariable Long userId, @RequestBody Request request) {
+    public void addRequest(@PathVariable Long userId, @RequestBody Request request) {
         request.setDateOfContact(LocalDate.now());
         this.requestService.add(userId, request);
     }
 
     @PutMapping("/{requestId}")
-    void updateRequest(@PathVariable Long userId, @PathVariable Long requestId, @RequestBody Request request) {
+    public void updateRequest(@PathVariable Long userId, @PathVariable Long requestId, @RequestBody Request request) {
         request.setId(requestId);
         request.setDateOfContact(LocalDate.now());
         this.requestService.update(userId, request);
     }
 
     @DeleteMapping("/{requestId}")
-    void deleteRequest(@PathVariable Long userId, @PathVariable Long requestId) {
+    public void deleteRequest(@PathVariable Long userId, @PathVariable Long requestId) {
         this.requestService.delete(userId, requestId);
     }
 }
