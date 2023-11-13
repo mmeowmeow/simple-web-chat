@@ -4,7 +4,7 @@
 
 ## Installation
 
-Can be install jar (from Packages page) or as a docker image: `docker pull ghcr.io/mmeowmeow/simple-web-chat:latest`
+Can be install jar (from Packages page) or as a docker image: `docker pull ghcr.io/mmeowmeow/simple-web-chat:master`
 
 ## Run locally
 
