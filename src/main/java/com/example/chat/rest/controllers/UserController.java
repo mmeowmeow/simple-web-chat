@@ -15,17 +15,17 @@ public class UserController {
     }
 
     @GetMapping
-    Iterable<User> getAllUsers() {
+    public Iterable<User> getAllUsers() {
         return userService.get();
     }
 
     @GetMapping("/{userId}")
-    User getUserById(@PathVariable Long userId) {
+    public User getUserById(@PathVariable Long userId) {
         return userService.get(userId);
     }
 
     @RequestMapping(value = "/name", method = RequestMethod.GET)
-    User getUserByName(@RequestParam(value = "userName") String userName) {
+    public User getUserByName(@RequestParam(value = "userName") String userName) {
         return userService.getByName(userName);
     }
 }
