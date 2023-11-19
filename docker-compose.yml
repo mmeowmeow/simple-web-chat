@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: ghcr.io/mmeowmeow/simple-web-chat:master
+    container_name: backend
+    restart: always
     ports:
       - 8080:8080
     volumes:
