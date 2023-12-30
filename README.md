@@ -12,7 +12,7 @@ Can be install jar (from Packages page) or as a docker image: `docker pull ghcr.
 
 or<br>
 
-`docker compose up -d` from app directory. If you want to build it from sources - `docker compose build` and then `docker compose up -d`
+copy provided docker-compose.yml, `docker compose pull && docker compose up -d` from directory with compose file. If you want to build it from sources - `docker compose build && docker compose up -d`
 
 ## List REST API endpoints
 
